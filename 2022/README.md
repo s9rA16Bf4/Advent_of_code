@@ -1,5 +1,6 @@
 ## Advent of code 2022
-Every day, a new puzzle to solve, a new language to learn. 
+
+This year I have utilized the following languages,
 
 Day 1 - Golang [Calorie Counting]
 
