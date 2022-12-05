@@ -5,7 +5,7 @@ My take on the Advent of code challenge.
 The general rules that I will follow are,
 ```
 1. Every new puzzle must be solved using a previously unused programming language. 
-2. My solution to a said challenge must be completed and uploaded before 23:59 on the day of the release.
+2. The solution to a challenge must be completed and uploaded before 23:59 on the day of release.
 3. Each solution must be able to take a user input in the form of a file to solve.
 ```
 ## What is advent of code?
