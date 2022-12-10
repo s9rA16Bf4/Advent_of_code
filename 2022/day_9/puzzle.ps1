@@ -16,67 +16,12 @@ if (-not(Test-Path -Path $file -PathType Leaf)) {
 
 $guts = Get-Content $file
 $guts = $guts -split " "
-
-# Define our grid
-$grid = New-Object 'object[,]' 6,6
-
-# Start values
-$head_y = 5
-$head_x = 0
-
-$prev_head_x = 0
-$prev_head_y = 5
-$tail_y = $prev_head_y
-$tail_x = $prev_head_x
-$prev_tail_x = $tail_x
-$prev_tail_y = $tail_y
-
 $start = $TRUE # If this is set to FALSE then we have move outside of our start location
 $skip_tail = $FALSE
-
-function BuildGrid(){
-    for ($y = 0; $y -lt $grid.length/6; $y++){
-        for ($x = 0; $x -lt $grid.length/6; $x++){
-            $grid[$y, $x] = "."
-        }
-    }
-
-    $grid[5,0] = "s" # Indicating the start
-}
-
-function PrintGrid(){
-    for ($y = 0; $y -lt $grid.length/6; $y++){
-        $line = ""
-        for ($x = 0; $x -lt $grid.length/6; $x++){
-            $line += $grid[$y, $x]
-        }
-        $line
-    }
-}
-
-function UpdateTail(){
-    $tail_x = $prev_head_x
-    $tail_y = $prev_head_y
-
-    if ($skip_tail){
-        "Test: $direction , $prev_direction"
-        "y:$tail_y , x:$tail_x"
-
-        $grid[$tail_y, $tail_x] = "."
-    }else{
-        $grid[$tail_y, $tail_x] = "#"
-    }
-}
-
-function UpdateHeader(){
-    UpdateTail
-
-    $grid[$head_y, $head_x] = "H"
-}
+$tail = [System.Tuple]::Create(0,0)
+$history = [System.Collections.ArrayList]@()
 
 function Main(){
-    BuildGrid
-
     $prev_direction = ""
     $amount = -1
     $direction = ""
@@ -99,29 +44,36 @@ function Main(){
 
             while ($amount -gt 0){
                 $skip_tail = $FALSE
-                $prev_head_y = $head_y
-                $prev_head_x = $head_x
+                $x = $tail.Item1
+                $y = $tail.Item2
 
                 if ($direction -eq "R"){
-                    $head_x++
+                    $x++
 
                 }elseif ($direction -eq "L"){
-                    $head_x--
+                    $x--
 
                 }elseif ($direction -eq "U"){
-                    $head_y--
+                    $y++
     
                 }elseif ($direction -eq "D"){
-                    $head_y++
+                    $y--
                 }
 
-                if (($direction -ne $prev_direction) -and (($direction -eq "R" -or $direction -eq "L" -or $direction -eq "U" -or 
-                $direction -eq "D") -and ($prev_direction -eq "U" -or $prev_direction -eq "D" -or $prev_direction -eq "R" -or  $prev_direction -eq "L"))){
-               
+                $tail = [System.Tuple]::Create($x,$y) # Update the tuple
+
+                # -and !($direction -eq "R" -and $prev_direction -eq "L") -and !($direction -eq "U" -and $prev_direction -eq "D")
+                if (($direction -ne $prev_direction) -or (($prev_direction -ne "") -and !(($direction -eq "R" -and $prev_direction -eq "L") -and !($direction -eq "U" -and $prev_direction -eq "D"))) ){
                    $skip_tail = $TRUE
+                   $amount--
                 }
 
-                UpdateHeader
+                # We must check if we have been in this cell before
+                if (!($skip_tail) && !($history_x -contains $tail)){
+                    #"$direction , $prev_direction"
+                    $history.Add($tail) | out-null
+
+                }
 
                 $amount--
                 $prev_direction = $direction # Overwrite the old value
@@ -129,10 +81,8 @@ function Main(){
         }
     }
     
-    $positions -= 1
-    #"[PART 1] Tail moved to "$positions
+    $tail_movement = $history.count - 1 # We do this to represent that the tail is still behind the head
+    "[PART 1] Tail moved to a total of $tail_movement cells"
 }
 
 main
-
-PrintGrid
