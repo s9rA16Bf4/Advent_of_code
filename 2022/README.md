@@ -7,13 +7,13 @@ This year I have utilized the following languages,
 | 1 | Golang | Calorie Counting | |
 | 2 | C | Rock Paper Scissors | |
 | 3 | Python | Rucksack Reorganization | |
-| 4 | Scratch | Camp Cleanup | Lacks support for user input and support for reading files |
+| 4 | Scratch | Camp Cleanup | Lacks support for user input and for reading files |
 | 5 | Javascript | Supply Stacks | |
 | 6 | FreeBasic | Tuning Trouble | |
 | 7 | Ruby | No Space Left On Device | |
 | 8 | R | Treetop Tree House | Not completed in the allocated time slot |
-| 9 |  |  | |
-| 10 |  |  | |
+| 9 | Powershell | Rope Bridge | Not completed in the allocated time slot |
+| 10 | Bash | Cathode-Ray Tube | Part 2 is printed before Part 1 |
 | 11 |  |  | |
 | 12 |  |  | |
 | 13 |  |  | |
