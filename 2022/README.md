@@ -13,8 +13,8 @@ This year I have utilized the following languages,
 | 7 | Ruby | No Space Left On Device | |
 | 8 | R | Treetop Tree House | Not completed in the allocated time slot |
 | 9 | Powershell | Rope Bridge | Not completed in the allocated time slot |
-| 10 | Bash | Cathode-Ray Tube | Part 2 is printed before Part 1 |
-| 11 |  |  | |
+| 10 | Bash | Cathode-Ray Tube | |
+| 11 | Java | Monkey in the Middle | |
 | 12 |  |  | |
 | 13 |  |  | |
 | 14 |  |  | |
